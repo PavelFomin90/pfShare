@@ -55,8 +55,7 @@ generated HTML by default:
           <a href="#image' + hash +'"></a>
         </div>
 ```
-by now it's no method to change it, only in code, but it was planed to do
-
+by now it's no method to change it, only in code, but it in plan
 parsing for `image_id` also you can change in code
 by default it:
 ```javascript
