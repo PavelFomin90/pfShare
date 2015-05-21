@@ -4,7 +4,7 @@
 ----------
 ##Usage
 You can use it in this way:
-```jQuery
+```javascript
 $(el).pfShare(method, parametrs);
 ```
 ##Methods
@@ -35,11 +35,11 @@ $(el).pfShare(method, parametrs);
     default : $("img").first().attr("src")
 
 You can change defaults by pushing the object into function:
-```
+```javascript
 $('.vk').pfShare('vk', { url : "somesite.com"});
 ```
 Also you can use data-attributes in your html:
-```
+```html
 <span class="button-share vk" data-title="awsome image">VK</span>
 ```
 
@@ -59,7 +59,7 @@ by now it's no method to change it, only in code, but it was planed to do
 
 parsing for `image_id` also you can change in code
 by default it:
-```
+```javascript
 self.parent().parent().find("img").attr("src").split("/").pop(-1).split("-").pop(-1).split(".")[0]
 ```
 hash to HTML paste in the same way
