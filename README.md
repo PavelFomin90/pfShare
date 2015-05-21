@@ -1,4 +1,4 @@
-#Social Shares for images v 0.2
+#Social Shares for images v 0.3
 
 
 ----------
@@ -38,8 +38,12 @@ The `<img>` you want to share must be in wrapper like that
     image - image to push for share 
     default : $("img").first().attr("src"), 
    
-  customClasses - the string of classes for addin to share buttons 
-  default: ''
+    customClasses - the string of classes for addin to share buttons 
+    default: '',
+    
+    socials - the object of selected social networks
+    default: {vk : true, fb : true, tw : true, gl : true}
+
 
 
 

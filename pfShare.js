@@ -1,5 +1,5 @@
 /* ===========================================================
- * pfShare v 0.2
+ * pfShare v 0.3
  * ===========================================================
  *
  * License: MIT
@@ -17,30 +17,39 @@
                 description:encodeURIComponent($("meta[name='description']").attr("content")),
                 image:$("img").first().attr("src"),
                 customClasses : '',
+                socials : {vk : true, fb : true, tw : true, gl : true}
             }, options);
 
             pluginTarget = $(this);
             targetClass = "." + pluginTarget[0].className;
-            
+            socialAvailable = ['vk','fb','tw','gl'];
+
             function init(){
-
-                pluginTarget.wrap('<div class="share-wrapper"></div>');
-                appendButtons();
-                setHandlers(options);
-
+                socialInWork = [];
+                socialAvailable.forEach(function(item, i){
+                    if(options.socials[item]){
+                        socialInWork[i] = item;
+                    }
+                })
+                if(socialInWork.length > 0){
+                    pluginTarget.wrap('<div class="share-wrapper"></div>');
+                    appendButtons();
+                    setHandlers(options);
+                } else {
+                    console.error("No socials selected!")
+                }
             };
 
           var appendButtons = function (){
                 pluginTarget.each(function(){
                     var anchor = $(this).getImagePref();
-                    var shareForm = ''+
-                        '<div class="box-share">' + 
-                            '<span class="button-share vk ' + options.customClasses + '" data-type="vk">VK</span>' + 
-                            '<span class="button-share fb ' + options.customClasses + '" data-type="fb">FB</span>' + 
-                            '<span class="button-share tw ' + options.customClasses + '" data-type="tw">TW</span>' + 
-                            '<span class="button-share gl ' + options.customClasses + '" data-type="gl">GL</span>' + 
-                            '<a href="#image' + anchor +'"></a>'
-                        '</div>';
+                    var shareForm = '<div class="box-share">';
+                    var socials = socialInWork;
+                        socials.forEach(function(social){
+                            shareForm += '<span class="button-share ' + social + ' ' + options.customClasses + '" data-type="'+ social + '">' + social + '</span>';
+                        })
+                        shareForm += '<a href="#image' + anchor +'"></a>'
+                        shareForm += '</div>';
                     $(this).append( shareForm );
                 });
              }
