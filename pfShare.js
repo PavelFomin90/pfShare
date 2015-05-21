@@ -50,7 +50,7 @@
                         })
                         shareForm += '<a href="#image' + anchor +'"></a>'
                         shareForm += '</div>';
-                    $(this).append( shareForm );
+                    $(this).closest(".share-wrapper").append( shareForm );
                 });
              }
 
@@ -67,7 +67,6 @@
 
         var getParams = function(self,def){
           var param = {};
-          console.log(targetClass);
           param.url = self.closest(targetClass).data("url") || def.url;
           param.title = self.closest(targetClass).data("title") || def.title;
           param.description = self.closest(targetClass).data("descr") || def.description;

@@ -1,4 +1,4 @@
-#Social Shares for images v 0.3
+#Social Shares for images v 0.3.1
 
 
 ----------
@@ -72,8 +72,14 @@ before:
 after:
 <div class="share_wrapper">
   <div class="img_wrapper">
-      <img src="/awsome.jpg" />
+      <img src="/image-123.jpg" />
   </div>
+  <div class="box-share">
+    <span class="button-share vk " data-type="vk">vk</span>
+    <span class="button-share fb " data-type="fb">fb</span>
+    <span class="button-share tw " data-type="tw">tw</span>
+    <span class="button-share gl " data-type="gl">gl</span>
+    <a href="#image123"></a></div>
 </div>
 ```
 ##Open Graph
