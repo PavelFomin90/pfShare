@@ -67,9 +67,16 @@ before:
 after:
 ```html
 <div class="share_wrapper">
-  <div class="img_wrapper">
+    <div class="img_wrapper">
       <img src="/awsome.jpg" />
-  </div>
+        <div class="box-share">
+            <span class="button-share vk " data-type="vk">VK</span>
+            <span class="button-share fb " data-type="fb">FB</span>
+            <span class="button-share tw " data-type="tw">TW</span>
+            <span class="button-share gl " data-type="gl">GL</span>
+            <a href="#image1901"></a>
+        </div>
+    </div>
 </div>
 ```
 ##Open Graph
