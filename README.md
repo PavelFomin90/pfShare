@@ -1,23 +1,27 @@
-#Social Shares for images v 0.1
+#Social Shares for images v 0.2
 
 
 ----------
+## Social Networks
+Social networks available for that moment
+```
+vk: vk.com
+fb: facebook.com
+tw:twitter.com
+gl: Google+
+```
 ##Usage
 You can use it in this way:
 ```javascript
-$(el).pfShare(method, parametrs);
+$(el).pfShare([parametrs]);
 ```
-##Methods
-
-```plaintext
-'vk' - vk.com
-'fb' - facebook.com
-'tw' - tweet
-'gl' - share to Google+
-'appendButtons' - this method allow you to append social buttons to the image you want 
+The `<img>` you want to share must be in wrapper like that
 ```
-
-##Parametrs
+<div class="img_wrapper">
+    <img src="/awsome.jpg" />
+</div>
+```
+##Parameters
 
     url - url to push for share
     default : window.location.protocol + "//" + window.location.hostname + window.location.pathname, 
@@ -32,44 +36,49 @@ $(el).pfShare(method, parametrs);
     default : encodeURIComponent($("meta[name='description']").attr("content")),
     
     image - image to push for share 
-    default : $("img").first().attr("src")
+    default : $("img").first().attr("src"), 
+   
+  customClasses - the string of classes for addin to share buttons 
+  default: ''
 
-You can change defaults by pushing the object into function:
+
+
+You can change defaults options by pushing the object into function:
 ```javascript
-$('.vk').pfShare('vk', { url : "somesite.com"});
+$('.img_wrapper').pfShare({ url : "somesite.com"});
 ```
 Also you can use data-attributes in your html:
 ```html
-<span class="button-share vk" data-title="awsome image">VK</span>
+<div class="img_wrapper"  data-title="awsome image">
+  <img src="/awsome.jpg" />
+</div>
 ```
 
-##HTML, parsing, url hashes
-Method  `appendButtons` generate HTML appending it to selected element
-generated HTML by default:
-```html
-        <div class="box-share">
-          <span class="button-share vk">VK</span>
-          <span class="button-share fb">FB</span>
-          <span class="button-share tw">TW</span>
-          <span class="button-share gl">GL</span>
-          <a href="#image' + hash +'"></a>
-        </div>
-```
-by now it's no method to change it, only in code, but it was planed to do
+##HTML
+This plugin create wrapper div for  target elements with `class="share-wrapper"`
+The share box have classes `box-share` for itself  and `button-share` and shortname of social network, also share icons supported custom classes.
 
-parsing for `image_id` also you can change in code
-by default it:
-```javascript
-self.parent().parent().find("img").attr("src").split("/").pop(-1).split("-").pop(-1).split(".")[0]
+
+```plaintext
+before:
+<div class="img_wrapper">
+    <img src="/awsome.jpg" />
+</div>
+
+after:
+<div class="share_wrapper">
+  <div class="img_wrapper">
+      <img src="/awsome.jpg" />
+  </div>
+</div>
 ```
-hash to HTML paste in the same way
 ##Open Graph
-That plugin generate share link with GET parametr 
+That plugin generate share link with GET parameter 
 ```
 ?image=image_id
 ```
 
-so you can dynamicly generate og:image on server
+so you can dynamicly generate og:image on server for facebook sharing correct work
 
 example on php:
 ```php
