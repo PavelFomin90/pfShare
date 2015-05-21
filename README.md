@@ -16,7 +16,7 @@ You can use it in this way:
 $(el).pfShare([parametrs]);
 ```
 The `<img>` you want to share must be in wrapper like that
-```
+```html
 <div class="img_wrapper">
     <img src="/awsome.jpg" />
 </div>
@@ -58,14 +58,14 @@ Also you can use data-attributes in your html:
 This plugin create wrapper div for  target elements with `class="share-wrapper"`
 The share box have classes `box-share` for itself  and `button-share` and shortname of social network, also share icons supported custom classes.
 
-
-```plaintext
 before:
+```html
 <div class="img_wrapper">
     <img src="/awsome.jpg" />
 </div>
-
+```
 after:
+```html
 <div class="share_wrapper">
   <div class="img_wrapper">
       <img src="/awsome.jpg" />
