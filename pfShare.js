@@ -16,7 +16,7 @@
             description: getDefault.descr(),
             image: getDefault.image(),
             customClasses : [],
-            socials : {vk : true, fb : true, tw : true, gl : true}
+            socials : ['vk','fb','tw','gl']
         }, options);
 
         pluginTarget = $(this);
@@ -29,14 +29,18 @@
 
     var init = function (options){
         var options = options;
-        targetClass = "." + pluginTarget[0].className;
-        socialAvailable = ['vk','fb','tw','gl'];
+        var targetClass = "." + pluginTarget[0].className;
         socialInWork = [];
-        socialAvailable.forEach(function(item, i){
-            if(options.socials[item]){
+
+
+        options.socials.forEach(function(item, i){
+            console.log(item)
+            if(shareMethods[item]){
                 socialInWork[i] = item;
             }
+            console.log(socialInWork)
         });
+
         if(socialInWork.length > 0){
             makeView(options);
             setHandlers(options);
@@ -59,12 +63,15 @@
             var output = encodeURIComponent($("meta[name='description']").attr("content")) || "Description is not set"
             return output;
         },
-         image : function(){
+        image : function(){
             var output = $("img").first().attr("src");
             return output;
-         }
+        }
     }
 
+    var initSocials = function(){
+
+    }
 
     var makeView = function (options){
         pluginTarget.each(function( i ){

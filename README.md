@@ -1,4 +1,4 @@
-#Social Shares for images v 0.6
+#Social Shares for images v 0.7
 
 
 ----------
@@ -85,7 +85,7 @@ That plugin generate share link with GET parameter
 ?image=image_src
 ```
 
-so you can dynamicly generate og:image on server for facebook sharing correct work
+so you can dynamiclly generate og:image on server for facebook sharing correct work
 
 example on php:
 ```php
