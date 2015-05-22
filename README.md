@@ -1,4 +1,4 @@
-#Social Shares for images v 0.5
+#Social Shares for images v 0.6
 
 
 ----------

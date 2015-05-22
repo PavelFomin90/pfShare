@@ -1,5 +1,5 @@
 /* ===========================================================
- * pfShare v 0.5
+ * pfShare v 0.6
  * ===========================================================
  *
  * License: MIT
@@ -8,82 +8,105 @@
  * ========================================================== */
 (function( $ ){
 
-        $.fn.pfShare = function(options) {
+    $.fn.pfShare = function(options) {
 
-            options = $.extend( {//Default settigs and privat methods
-                url:window.location.protocol + "//" + window.location.hostname + window.location.pathname,
-                title:encodeURIComponent($("meta[name=title]").attr("content")),
-                description:encodeURIComponent($("meta[name='description']").attr("content")),
-                image:$("img").first().attr("src"),
-                customClasses : [],
-                socials : {vk : true, fb : true, tw : true, gl : true}
-            }, options);
+        options = $.extend( {//Default settigs and privat methods
+            url: getDefault.url(),
+            title: getDefault.title(),
+            description: getDefault.descr(),
+            image: getDefault.image(),
+            customClasses : [],
+            socials : {vk : true, fb : true, tw : true, gl : true}
+        }, options);
 
-            pluginTarget = $(this);
+        pluginTarget = $(this);
 
-            init(options);
-        };
+        init(options);
+    };
 
-        function init(options){
-            var options = options;
-            targetClass = "." + pluginTarget[0].className;
-            socialAvailable = ['vk','fb','tw','gl'];
-            socialInWork = [];
-            socialAvailable.forEach(function(item, i){
-                if(options.socials[item]){
-                    socialInWork[i] = item;
-                }
-            });
-            if(socialInWork.length > 0){
-                makeView(options);
-                setHandlers(options);
-            } else {
-                console.error("No socials selected!")
+
+
+
+    var init = function (options){
+        var options = options;
+        targetClass = "." + pluginTarget[0].className;
+        socialAvailable = ['vk','fb','tw','gl'];
+        socialInWork = [];
+        socialAvailable.forEach(function(item, i){
+            if(options.socials[item]){
+                socialInWork[i] = item;
             }
-
+        });
+        if(socialInWork.length > 0){
+            makeView(options);
+            setHandlers(options);
+        } else {
+            console.error("No socials selected!")
         }
+    }
 
-        var makeView = function (options){
-            pluginTarget.each(function( i ){
-                var shareForm = '<div class="box-share">';
-                var socials = socialInWork;
-                var customClasses = options.customClasses.join(" ");
-                $(this).wrap('<div class="share-wrapper" data-id="'+ i +'"></div>');
-                    socials.forEach(function(social){
-                        shareForm += '<span class="button-share ' + social + ' ' + options.customClasses + '" data-type="'+ social + '"></span>';
-                    })
-                    shareForm += '<a href="#image' + i +'" name="image'+ i + '"></a>'
-                    shareForm += '</div>';
-                $(this).closest(".share-wrapper").append( shareForm );
-            });
-        }
+   var getDefault = {
+        url : function(){
+            var output = window.location.protocol + "//" + window.location.hostname + window.location.pathname;
+            return output
+        },
+        title : function(){
+            var output = encodeURIComponent($("meta[name=title]").attr("content")) || "Title is not set!";
+            return output;
+        },
 
-        var setHandlers = function(options){
-            $(".button-share").on("click",function(){
-                var type = $(this).data("type");
-                shareMethods[type].call(this,options);
-            });
-        };
+        descr : function(){
+            var output = encodeURIComponent($("meta[name='description']").attr("content")) || "Description is not set"
+            return output;
+        },
+         image : function(){
+            var output = $("img").first().attr("src");
+            return output;
+         }
+    }
 
-        var getParams = function(self,def){
-          var param = {};
-          param.url = self.closest(targetClass).data("url") || def.url;
-          param.title = self.closest(targetClass).data("title") || def.title;
-          param.description = self.closest(targetClass).data("descr") || def.description;
-          param.image = self.closest(targetClass).data("image") || window.location.origin + self.closest(".share-wrapper").find("img").attr("src") || def.image;
-          param.image_id = self.getImageId();
-          return param;
-        };
 
-        $.fn.getImageId = function(){
-            imageId = $(this).closest(".share-wrapper").data("id");
-            return imageId;
-        }
+    var makeView = function (options){
+        pluginTarget.each(function( i ){
+            var shareForm = '<div class="box-share">';
+            var socials = socialInWork;
+            var customClasses = options.customClasses.join(" ");
+            $(this).wrap('<div class="share-wrapper" data-id="'+ i +'"></div>');
+                socials.forEach(function(social){
+                    shareForm += '<span class="button-share ' + social + ' ' + options.customClasses + '" data-type="'+ social + '"></span>';
+                })
+                shareForm += '<a href="#image' + i +'" name="image'+ i + '"></a>'
+                shareForm += '</div>';
+            $(this).closest(".share-wrapper").append( shareForm );
+        });
+    }
 
-        var getHash = function(img_id){
-            var hash = "image" + img_id;
-            return hash;
-        }
+    var setHandlers = function(options){
+        $(".button-share").on("click",function(){
+            var type = $(this).data("type");
+            shareMethods[type].call(this,options);
+        });
+    };
+
+    var getParams = function(self,def){
+      var param = {};
+      param.url = self.closest(targetClass).data("url") || def.url;
+      param.title = self.closest(targetClass).data("title") || def.title;
+      param.description = self.closest(targetClass).data("descr") || def.description;
+      param.image = self.closest(targetClass).data("image") || window.location.origin + self.closest(".share-wrapper").find("img").attr("src") || def.image;
+      param.image_id = getImageId(self);
+      return param;
+    };
+
+    var getImageId = function( self ){
+        imageId = self.closest(".share-wrapper").data("id");
+        return imageId;
+    }
+
+    var getHash = function(img_id){
+        var hash = "image" + img_id;
+        return hash;
+    }
 
     var shareMethods = {
          vk : function( options ) {
@@ -99,7 +122,7 @@
                 send += "&image=" + params.image;
                 window.open(send, "", "toolbar=0,status=0,width=626,height=436");
                 return this;
-         },
+            },
 
          fb : function( options ) {
                 var self = $(this);
@@ -114,7 +137,7 @@
                 send += "&p[images][0]=" + params.image;
                 window.open(send, "", "toolbar=0,status=0,width=626,height=436");
                 return this;
-         },
+            },
 
          tw : function( options ) {
                 var self = $(this);
@@ -128,7 +151,7 @@
                     send += "&counturl=" + params.url;
                 window.open(send, "", "toolbar=0,status=0,width=626,height=436");
                 return this;
-         },
+            },
 
         gl : function( options ) {
             var self = $(this);
@@ -140,6 +163,6 @@
             send += "&url=" + params.url + "?" + "image=" + params.image + "%23" +hash;
             window.open(send, "", "toolbar=0,status=0,width=626,height=436");
             return this;
-         }
+            }
     };
 })( jQuery );
