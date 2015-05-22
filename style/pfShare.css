@@ -1,0 +1,44 @@
+.share-wrapper{
+    position: relative;
+    display: inline-block;
+}
+
+.box-share {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  z-index: 1000;
+}
+
+.share-wrapper:hover .box-share{
+    display: block;
+}
+
+.button-share{
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    margin: 10px;
+    background: url("/assets/img/social-buttons.png");
+    cursor: pointer;
+}
+
+.vk{
+    background-position: 0 0;
+}
+
+.fb{
+    background-position: -36px 0;
+}
+
+.tw{
+    background-position: -72px 0;
+}
+
+.gl{
+    background-position: -109px 0;
+}

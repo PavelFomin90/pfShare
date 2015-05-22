@@ -1,5 +1,5 @@
 /* ===========================================================
- * pfShare v 0.4
+ * pfShare v 0.5
  * ===========================================================
  *
  * License: MIT
@@ -50,7 +50,7 @@
                 var customClasses = options.customClasses.join(" ");
                 $(this).wrap('<div class="share-wrapper" data-id="'+ i +'"></div>');
                     socials.forEach(function(social){
-                        shareForm += '<span class="button-share ' + social + ' ' + options.customClasses + '" data-type="'+ social + '">' + social + '</span>';
+                        shareForm += '<span class="button-share ' + social + ' ' + options.customClasses + '" data-type="'+ social + '"></span>';
                     })
                     shareForm += '<a href="#image' + i +'" name="image'+ i + '"></a>'
                     shareForm += '</div>';
@@ -108,7 +108,7 @@
                 var hash = getHash(params.image_id);
 
                 var send = "http://facebook.com/share.php?s=100";
-                send += "&p[url]=" + params.url + "?" + "image=" + params.image_pref  + "%23" + hash;
+                send += "&p[url]=" + params.url + "?" + "image=" + params.image  + "%23" + hash;
                 send += "&p[title]=" + params.title;
                 send += "&p[summary]=" + params.description;
                 send += "&p[images][0]=" + params.image;
@@ -123,7 +123,7 @@
                 var hash = getHash(params.image_id);
 
                 var send = "http://twitter.com/share?";
-                    send += "url=" + params.url + "?" + "image=" + params.image_pref  + "%23" +hash;
+                    send += "url=" + params.url + "?" + "image=" + params.image  + "%23" +hash;
                     send += "&text=" + params.title;
                     send += "&counturl=" + params.url;
                 window.open(send, "", "toolbar=0,status=0,width=626,height=436");
@@ -137,7 +137,7 @@
             var hash = getHash(params.image_id);
 
             var send = "https://plus.google.com/share?hl=ru";
-            send += "&url=" + params.url + "?" + "image=" + params.image_pref + "%23" +hash;
+            send += "&url=" + params.url + "?" + "image=" + params.image + "%23" +hash;
             window.open(send, "", "toolbar=0,status=0,width=626,height=436");
             return this;
          }
