@@ -1,5 +1,5 @@
 /* ===========================================================
- * pfShare v 0.6
+ * pfShare v 1.0
  * ===========================================================
  *
  * License: MIT
@@ -20,6 +20,7 @@
         }, options);
 
         pluginTarget = $(this);
+        socialInWork = [];
 
         init(options);
     };
@@ -30,22 +31,14 @@
     var init = function (options){
         var options = options;
         var targetClass = "." + pluginTarget[0].className;
-        socialInWork = [];
 
-
-        options.socials.forEach(function(item, i){
-            console.log(item)
-            if(shareMethods[item]){
-                socialInWork[i] = item;
-            }
-            console.log(socialInWork)
-        });
+        initSocials(options);
 
         if(socialInWork.length > 0){
             makeView(options);
             setHandlers(options);
         } else {
-            console.error("No socials selected!")
+            console.error("No socials selected!");
         }
     }
 
@@ -69,8 +62,12 @@
         }
     }
 
-    var initSocials = function(){
-
+    var initSocials = function(options){
+        options.socials.forEach(function(item, i){
+            if(shareMethods[item]){
+                socialInWork[i] = item;
+            }
+        });
     }
 
     var makeView = function (options){

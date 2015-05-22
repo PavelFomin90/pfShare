@@ -1,4 +1,4 @@
-#Social Shares for images v 0.7
+#Social Shares for images v 1.0
 
 
 ----------
@@ -38,8 +38,8 @@ The `<img>` you want to share must be in wrapper like that
     customClasses - array of classes for addin to share buttons 
     default: [],
     
-    socials - the object of selected social networks
-    default: {vk : true, fb : true, tw : true, gl : true}
+    socials - the array of selected social networks
+    default: ['vk','fb','tw','gl']
 
 
 
