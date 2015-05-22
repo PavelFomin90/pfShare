@@ -1,4 +1,4 @@
-#Social Shares for images v 0.3.1
+#Social Shares for images v 0.4
 
 
 ----------
@@ -7,7 +7,7 @@ Social networks available for that moment
 ```
 vk: vk.com
 fb: facebook.com
-tw:twitter.com
+tw: twitter.com
 gl: Google+
 ```
 ##Usage
@@ -26,10 +26,7 @@ The `<img>` you want to share must be in wrapper like that
     url - url to push for share
     default : window.location.protocol + "//" + window.location.hostname + window.location.pathname, 
     
-    hash: - hash to push for share
-    default : '' 
-    
-    title -  title to push for share
+    title - title to push for share
     default : encodeURIComponent($("meta[name=title]").attr("content")),
     
     description - description to push for share
@@ -38,8 +35,8 @@ The `<img>` you want to share must be in wrapper like that
     image - image to push for share 
     default : $("img").first().attr("src"), 
    
-    customClasses - the string of classes for addin to share buttons 
-    default: '',
+    customClasses - array of classes for addin to share buttons 
+    default: [],
     
     socials - the object of selected social networks
     default: {vk : true, fb : true, tw : true, gl : true}
@@ -59,8 +56,8 @@ Also you can use data-attributes in your html:
 ```
 
 ##HTML
-This plugin create wrapper div for  target elements with `class="share-wrapper"`
-The share box have classes `box-share` for itself  and `button-share` and shortname of social network, also share icons supported custom classes.
+This plugin create wrapper div for target elements with `class="share-wrapper"`
+The share box have classes `box-share` for itself  and `button-share` and shortname of social network for icons, also share icons supported custom classes.
 
 
 ```plaintext
@@ -70,27 +67,27 @@ before:
 </div>
 
 after:
-<div class="share_wrapper">
+<div class="share_wrapper" data-id="123">
   <div class="img_wrapper">
-      <img src="/image-123.jpg" />
+      <img src="/awsome.jpg" />
   </div>
   <div class="box-share">
     <span class="button-share vk " data-type="vk">vk</span>
     <span class="button-share fb " data-type="fb">fb</span>
     <span class="button-share tw " data-type="tw">tw</span>
     <span class="button-share gl " data-type="gl">gl</span>
-    <a href="#image123"></a></div>
+    <a href="#image123" name="image123"></a></div>
 </div>
 ```
 ##Open Graph
 That plugin generate share link with GET parameter 
 ```
-?image=image_id
+?image=image_src
 ```
 
 so you can dynamicly generate og:image on server for facebook sharing correct work
 
 example on php:
 ```php
-    <meta property="og:image" content="http://<?php echo $_SERVER['SERVER_NAME'] ?>/assets/img/image-<?php echo $_GET['image']; ?>.jpg" />
+    <meta property="og:image" content="<?php echo $_GET['image']; ?> /">
 ```
