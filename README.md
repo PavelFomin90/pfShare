@@ -27,7 +27,7 @@ The `<img>` you want to share must be in wrapper like that
     default : window.location.protocol + "//" + window.location.hostname + window.location.pathname, 
     
     title - title to push for share
-    default : encodeURIComponent($("meta[name=title]").attr("content")),
+    default : encodeURIComponent($("title").text()),
     
     description - description to push for share
     default : encodeURIComponent($("meta[name='description']").attr("content")),
