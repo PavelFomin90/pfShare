@@ -46,7 +46,7 @@
             return output
         },
         title : function(){
-            var output = encodeURIComponent($("meta[name=title]").attr("content")) || "Title is not set!";
+            var output = encodeURIComponent($("title").text()) || "Title is not set!";
             return output;
         },
 
