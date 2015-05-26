@@ -10,7 +10,7 @@
 
     $.fn.pfShare = function(options) {
 
-        options = $.extend( {//Default settigs and privat methods
+       var options = $.extend( {//Default settigs and privat methods
             url: getDefault.url(),
             title: getDefault.title(),
             description: getDefault.descr(),
@@ -19,8 +19,8 @@
             socials : ['vk','fb','tw','gl']
         }, options);
 
-        pluginTarget = $(this);
-        socialInWork = [];
+       options.pluginTarget = $(this);
+       options.socialInWork = [];
 
         init(options);
     };
@@ -29,18 +29,16 @@
 
 
     var init = function (options){
-        var options = options;
-        var targetClass = "." + pluginTarget[0].className;
 
         initSocials(options);
 
-        if(socialInWork.length > 0){
+        if(options.socialInWork.length > 0){
             makeView(options);
             setHandlers(options);
         } else {
             console.error("No socials selected!");
         }
-    }
+    };
 
    var getDefault = {
         url : function(){
@@ -60,30 +58,30 @@
             var output = $("img").first().attr("src");
             return output;
         }
-    }
+    };
 
     var initSocials = function(options){
         options.socials.forEach(function(item, i){
             if(shareMethods[item]){
-                socialInWork[i] = item;
-            }
+                options.socialInWork[i] = item;
+            };
         });
-    }
+    };
 
     var makeView = function (options){
-        pluginTarget.each(function( i ){
+        options.pluginTarget.each(function( i ){
             var shareForm = '<div class="box-share">';
-            var socials = socialInWork;
+            var socials = options.socialInWork;
             var customClasses = options.customClasses.join(" ");
             $(this).wrap('<div class="share-wrapper" data-id="'+ i +'"></div>');
                 socials.forEach(function(social){
                     shareForm += '<span class="button-share ' + social + ' ' + options.customClasses + '" data-type="'+ social + '"></span>';
-                })
+                });
                 shareForm += '<a href="#image' + i +'" name="image'+ i + '"></a>'
                 shareForm += '</div>';
             $(this).closest(".share-wrapper").append( shareForm );
         });
-    }
+    };
 
     var setHandlers = function(options){
         $(".button-share").on("click",function(){
@@ -94,6 +92,8 @@
 
     var getParams = function(self,def){
       var param = {};
+      var targetClass = "." + def.pluginTarget[0].className;
+
       param.url = self.closest(targetClass).data("url") || def.url;
       param.title = self.closest(targetClass).data("title") || def.title;
       param.description = self.closest(targetClass).data("descr") || def.description;
