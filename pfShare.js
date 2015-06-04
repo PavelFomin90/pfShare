@@ -92,6 +92,15 @@
 
     var getParams = function(self,def){
       var param = {};
+      var getTargetClass = function(){
+           var className;
+           if(def.pluginTarget[0].className){
+                className = "." + def.pluginTarget[0].className;
+                return className
+           } else{
+             return false
+           }
+      }
       var targetClass = getTargetClass();
       var imageForShare = function(){
             var imageSrc = self.closest(".share-wrapper").find("img").attr("src");
@@ -103,20 +112,10 @@
                 return imageSrc;
             }
       };
-      var getTargetClass = function(){        
-           var className;
-           if(def.pluginTarget[0].className){
-                className = "." + def.pluginTarget[0].className;
-                return className
-           } else{
-             return false
-           }
-
-      }
       var infoDataAttr = function(type){
             if (targetClass){
                return self.closest(targetClass).data(type);
-            } else { retur false}
+            } else { return false}
       }
 
       param.url = infoDataAttr("url") || def.url;
