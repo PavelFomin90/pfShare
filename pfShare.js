@@ -92,7 +92,7 @@
 
     var getParams = function(self,def){
       var param = {};
-      var targetClass = "." + def.pluginTarget[0].className;
+      var targetClass = getTargetClass();
       var imageForShare = function(){
             var imageSrc = self.closest(".share-wrapper").find("img").attr("src");
 
@@ -102,13 +102,27 @@
                 imageSrc = window.location.origin + imageSrc;
                 return imageSrc;
             }
+      };
+      var getTargetClass = function(){        
+           var className;
+           if(def.pluginTarget[0].className){
+                className = "." + def.pluginTarget[0].className;
+                return className
+           } else{
+             return false
+           }
 
       }
+      var infoDataAttr = function(type){
+            if (targetClass){
+               return self.closest(targetClass).data(type);
+            } else { retur false}
+      }
 
-      param.url = self.closest(targetClass).data("url") || def.url;
-      param.title = self.closest(targetClass).data("title") || def.title;
-      param.description = self.closest(targetClass).data("descr") || def.description;
-      param.image = self.closest(targetClass).data("image") || imageForShare() || def.image;
+      param.url = infoDataAttr("url") || def.url;
+      param.title = infoDataAttr("title") || def.title;
+      param.description = infoDataAttr("descr") || def.description;
+      param.image = infoDataAttr("image") || imageForShare() || def.image;
       param.image_id = getImageId(self);
       return param;
     };
