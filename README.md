@@ -33,7 +33,7 @@ The `<img>` you want to share must be in wrapper like that
     default : encodeURIComponent($("meta[name='description']").attr("content")),
     
     image - image to push for share 
-    default : $("img").first().attr("src"), 
+    default : encodeURIComponent($("meta[name='og:image']").attr("content")) || $("img").first().attr("src"), 
    
     customClasses - array of classes for addin to share buttons 
     default: [],

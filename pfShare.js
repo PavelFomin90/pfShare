@@ -55,7 +55,7 @@
             return output;
         },
         image : function(){
-            var output = $("img").first().attr("src");
+            var output = encodeURIComponent($("meta[name='og:image']").attr("content")) || $("img").first().attr("src");
             return output;
         }
     };
@@ -93,11 +93,22 @@
     var getParams = function(self,def){
       var param = {};
       var targetClass = "." + def.pluginTarget[0].className;
+      var imageForShare = function(){
+            var imageSrc = self.closest(".share-wrapper").find("img").attr("src");
+
+            if(imageSrc.indexOf(window.location.origin) !== -1){
+                return imageSrc;
+            } else {
+                imageSrc = window.location.origin + imageSrc;
+                return imageSrc;
+            }
+
+      }
 
       param.url = self.closest(targetClass).data("url") || def.url;
       param.title = self.closest(targetClass).data("title") || def.title;
       param.description = self.closest(targetClass).data("descr") || def.description;
-      param.image = self.closest(targetClass).data("image") || window.location.origin + self.closest(".share-wrapper").find("img").attr("src") || def.image;
+      param.image = self.closest(targetClass).data("image") || imageForShare() || def.image;
       param.image_id = getImageId(self);
       return param;
     };
