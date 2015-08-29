@@ -55,7 +55,7 @@
             return output;
         },
         image : function(){
-            var output = encodeURIComponent($("meta[name='og:image']").attr("content")) || $("img").first().attr("src");
+            var output = $("meta[property='og:image']").attr("content") || $("img").first().attr("src");
             return output;
         }
     };
