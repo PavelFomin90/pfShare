@@ -10,7 +10,7 @@ fb: facebook.com
 tw: twitter.com
 gl: Google+
 ```
-##Usage
+## Usage
 You can use it in this way:
 ```javascript
 $(el).pfShare([parametrs]);
