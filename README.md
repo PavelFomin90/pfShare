@@ -21,24 +21,24 @@ The `<img>` you want to share must be in wrapper like that
     <img src="/awsome.jpg" />
 </div>
 ```
-##Parameters
+## Parameters
 
-    url - url to push for share
+    `url` - url to push for share
     default : window.location.protocol + "//" + window.location.hostname + window.location.pathname, 
     
-    title - title to push for share
+    `title` - title to push for share
     default : encodeURIComponent($("title").text()),
     
-    description - description to push for share
+    `description` - description to push for share
     default : encodeURIComponent($("meta[name='description']").attr("content")),
     
-    image - image to push for share 
+    `image` - image to push for share 
     default : encodeURIComponent($("meta[name='og:image']").attr("content")) || $("img").first().attr("src"), 
    
-    customClasses - array of classes for addin to share buttons 
+    `customClasses` - array of classes for addin to share buttons 
     default: [],
     
-    socials - the array of selected social networks
+    `socials` - the array of selected social networks
     default: ['vk','fb','tw','gl']
 
 
@@ -55,7 +55,8 @@ Also you can use data-attributes in your html:
 </div>
 ```
 
-##HTML
+## HTML
+
 This plugin create wrapper div for target elements with `class="share-wrapper"`
 The share box have classes `box-share` for itself  and `button-share` and shortname of social network for icons, also share icons supported custom classes.
 
@@ -79,7 +80,8 @@ after:
     <a href="#image123" name="image123"></a></div>
 </div>
 ```
-##Open Graph
+## Open Graph
+
 That plugin generate share link with GET parameter 
 ```
 ?image=image_src
